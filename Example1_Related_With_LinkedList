@@ -1,0 +1,31 @@
+/* Example: Using the linked list header file, create a list with integers ending with -99. Delete a node and print the result. */
+	
+	
+#include <iostream>
+#include "LinkedList.h"
+	
+using namespace std;
+	
+int main()
+{
+	LinkedList<int> list;
+	int number;
+		
+	cout << "Enter numbers ending with -99"; cin >> number; /* We could use a do-while loop instead of this. */
+	
+	while(number != -99)
+	{
+		list.insertLast(number);
+		cin >> number;
+	}
+		
+	cout << "Enter number to be deleted: "; cin >> number;
+		
+	list.delete(number);
+		
+	cout << "Linked List: " << list;
+		
+	return 0;
+}
+		
+				/* --- END OF EXAMPLE --- */
