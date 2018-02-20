@@ -1,0 +1,81 @@
+/* Example: 
+		- From a text file, input names and numbers of people and create a linked list of objects & output the result.
+		- Change the person numbered 111's name to: "Can". 
+	*/
+	
+	/* input.txt:
+		Ali		324
+		Veli	111
+		 .		 .
+		 .		 .
+		 .		 .
+		 .		 .
+	*/
+	
+	/* LinkedList is like:
+		| name: "Ali" |  |    | name: "Veli" |  |    ...........
+		|__num:  324__|__| -> |__num:   111__|__| -> ...........
+		
+	*/
+	
+	#include <iostream>
+	#include <fstream>
+	#include <string>
+	#include "LinkedList.h"
+	
+	using namespace std;
+	
+	class Person
+	{
+		public:
+			int number;
+			string name;
+			
+			friend ostream& operator << (ostream& os Person& pers)
+			{
+				os << pers.name << " " pers.number << endl;
+				return os;
+			}
+			
+			friend istream& operator >> (istream& is Person& pers)
+			{
+				is >> pers.name >> pers.number;
+				return is;
+			}
+			
+			Person(int receivedNumber = 0):receivedNumber(receivedNumber) { number = receivedNumber; }
+			
+			bool operator == (Person & pers)
+			{
+				return number = pers.number;
+			}
+	}
+
+	int main()
+	{
+		ifstream inp("input.txt");
+		LinkedList <Person> student;
+		
+		Person s;
+		inp >> s;
+		
+		while(!inp.eof())
+		{
+			student.insertLast(s);
+			inp >> s;
+		}
+		
+		cout << student;
+		
+		Person temp(111);
+		
+		node<Person> *p;
+		p = student.search(temp);
+		
+		if(p != NULL)
+			p -> info.name = "Can";
+		
+		cout << student;
+		
+		return 0;
+	}
