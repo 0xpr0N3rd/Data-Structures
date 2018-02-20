@@ -14,8 +14,7 @@
 	
 /* LinkedList is like:
 	| name: "Ali" |  |    | name: "Veli" |  |    ...........
-	|__num:  324__|__| -> |__num:   111__|__| -> ...........
-		
+	|__num:  324__|__| -> |__num:   111__|__| -> ...........	
 */
 	
 #include <iostream>
