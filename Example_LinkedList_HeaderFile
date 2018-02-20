@@ -1,235 +1,236 @@
                 /* --- STARTING POINT OF HEADER FILE --- */ 
 
 template <class T>
-		struct node
-		{
-			T info;
-			node<T> *link;
-		};
+struct node
+{
+	T info;
+	node<T> *link;
+};
 		
-		template <class T>
-		class LinkedList
-		{
-			protected:
-				node<T> *head, *last;
-				int count;
+template <class T>
+class LinkedList
+{
+	protected:
+		node<T> *head, *last;
+		int count;
 			
       public:
-				LinkedList();
-				~LinkedList();
+		LinkedList();
+		~LinkedList();
 			
-        bool emptyList();
-				int length();
+        	bool emptyList();
+		int length();
 				
-        T back(); /* back and front are returning the values that are inside the nodes */
-				T front();
+        	T back(); /* back and front are returning the values that are inside the nodes */
+		T front();
 				
-        void destroyList();
+        	void destroyList();
 				
-        node<T>* search(T&);
+       		node<T>* search(T&);
 				
-        void insertFirst(T&); //by sending the address of T&, we are saving our memory space but T would work as well as T&
-				void insertLast(T&);
-				void deleteNode(T&);
-				friend ostream& operator<< (ostream&, LinkedList<T>&);
-		};
+       		void insertFirst(T&); //by sending the address of T&, we are saving our memory space but T would work as well as T&
+		void insertLast(T&);
+		void deleteNode(T&);
+		friend ostream& operator<< (ostream&, LinkedList<T>&);
+};
 		
-		/* Examples for this linked list:
-			LinkedList <int> 1;
-			LinkedList <student> ahmet; */
+/* Examples for this linked list:
+	LinkedList <int> 1;
+	LinkedList <student> ahmet; */
 			
-		template <class T>
-		LinkedList<T>::LinkedList()
-		{
-			count = 0;
-			head = last = NULL;
-		}
+template <class T>
+LinkedList<T>::LinkedList()
+{
+	count = 0;
+	head = last = NULL;
+}
 		
-		template <class T>
-		bool LinkedList<T>::emptyList()
-		{
-			return head == NULL; //checks if head is null and if the list is empty
-		}
+template <class T>
+bool LinkedList<T>::emptyList()
+{
+	return head == NULL; //checks if head is null and if the list is empty
+}
 		
-		template <class T>
-		int LinkedList<T>::length()
-		{
-			return count;
-		}
+template <class T>
+int LinkedList<T>::length()
+{
+	return count;
+}
 	
-	/* Search */
+/* Search */
 		
-		template <class T>
-		node<T>* LinkedList<T>::Search(T& item)
-		{
-			bool found = false;
-			node<T> *p = head;
-			
-			while((p != NULL) && !found)
-			{
-				if(p-> info == item)
-					found = true;
-				else
-					p = p-> link;
-			}
-			return p;
-		}
-		
-	/* Insert element to first position */
-		
-		template <class T>
-		void LinkedList<T>::insertFirst(T& item)
-		{
-			node<T> *p = new node<T>; //Created a node named p that is empty right now. (p -> |__|_|)
-			p-> info = item;
-			p-> link = head;
-			head = p;
-			
-			if(last == NULL)
-				last = p;
-			
-			count++;
-		}
-		
-	/* Insert element to last position */
+template <class T>
+node<T>* LinkedList<T>::Search(T& item)
+{
+	bool found = false;
+	node<T> *p = head;
 	
-		template <class T>
-		void LinkedList<T>::insertLast(T& item)
-		{
-			node<T> *p = new node<T>;
-			p-> info = item;
-			p-> link = NULL;
-			
-			if(head != NULL)
-			{
-				last-> link = p;
-				last = p;
-			}
-			
-			else
-				head = last = p;
-			
-			count++;
-		}
-		
-		/* Trace this code block with the string values: "Ali", "Aslı", "Berk" */
-		
-		/* head -> |_Ali_|_| --> |_Aslı_|_| --> (p --> , last -->) |_Berk_|/| */
-			
-     /* --- Deleting a node that contains an item --- */
-
-	template <class T>
-	void LinkedList<T>::delete(T& item)
+	while((p != NULL) && !found)
 	{
-		node<T> *p, *q;
-		bool found = false;
-		
-		if(head == NULL)
-			cerr << "List is already empty!\n";
-		
+		if(p-> info == item)
+			found = true;
 		else
-		{
-			if(head->info == item)
-			{
-				p = head;
-				head = head-> link;
-				delete p;
-				count--;
-				
-				if(head == NULL)
-					last = NULL;
-			}
-			
-			else
-			{
-				p = head;
-				q = head-> link;
-				
-				while(q != NULL && !found)
-				{
-					if(q-> info == item)
-						found = true;
-					else
-					{
-						p = q;
-						q = q-> link;
-					}
-				}
-				
-				if(found)
-				{
-					p -> link = q-> link;
-					count--;
-					
-					if(last == q)
-						last = p;
-					
-					delete q;
-				}
-			}
-		}
+			p = p-> link;
 	}
 	
-	/* Try for: Example: head --> |_123_|_| -> |_-66_|_| -> |_57_|_| -> (last ->) |_33_|_| */
-	
-	/* --- Destroying The List --- */
-	
-	template <class T>
-	void LinkedList<T>::destroyList()
-	{
-		node<T> *p;
+	return p;
+}
 		
-		while(head != NULL)
+/* Insert element to first position */
+		
+template <class T>
+void LinkedList<T>::insertFirst(T& item)
+{
+	node<T> *p = new node<T>; //Created a node named p that is empty right now. (p -> |__|_|)
+	p-> info = item;
+	p-> link = head;
+	head = p;
+	
+	if(last == NULL)
+		last = p;
+			
+	count++;
+}
+		
+/* Insert element to last position */
+	
+template <class T>
+void LinkedList<T>::insertLast(T& item)
+{
+	node<T> *p = new node<T>;
+	p-> info = item;
+	p-> link = NULL;
+			
+	if(head != NULL)
+	{
+		last-> link = p;
+		last = p;
+	}
+			
+	else
+		head = last = p;
+			
+	count++;
+}
+		
+/* Trace this code block with the string values: "Ali", "Aslı", "Berk" */
+		
+/* head -> |_Ali_|_| --> |_Aslı_|_| --> (p --> , last -->) |_Berk_|/| */
+			
+/* --- Deleting a node that contains an item --- */
+
+template <class T>
+void LinkedList<T>::delete(T& item)
+{
+	node<T> *p, *q;
+	bool found = false;
+		
+	if(head == NULL)
+		cerr << "List is already empty!\n";
+		
+	else
+	{
+		if(head->info == item)
 		{
 			p = head;
 			head = head-> link;
 			delete p;
+			count--;
+				
+			if(head == NULL)
+				last = NULL;
 		}
-		
-		head = last = NULL;
-		count = 0;
-	}
-	
-	/* --- Destructor --- */
-	
-	template <class T>
-	LinkedList<T>::~LinkedList()
-	{
-		destroyList();
-	}
-	
-	/* --- Output --- */
-	
-	template <class T>
-	ostream& operator << (ostream& os, const LinkedList<T> & list)
-	{
-		node<T> *p = list.head;
-		
-		while(p != NULL)
+			
+		else
 		{
-			os << p-> info;
-			p = p-> link;
+			p = head;
+			q = head-> link;
+			
+			while(q != NULL && !found)
+			{
+				if(q-> info == item)
+					found = true;
+				else
+				{
+					p = q;
+					q = q-> link;
+				}
+			}
+				
+			if(found)
+			{
+				p -> link = q-> link;
+				count--;
+					
+				if(last == q)
+					last = p;
+					
+				delete q;
+			}
 		}
+	}
+}
+	
+/* Try for: Example: head --> |_123_|_| -> |_-66_|_| -> |_57_|_| -> (last ->) |_33_|_| */
+	
+/* --- Destroying The List --- */
+	
+template <class T>
+void LinkedList<T>::destroyList()
+{
+	node<T> *p;
 		
-		return os;
-	}
-	
-	/* --- First Element --- */
-	
-	template <class T>
-	T LinkedList<T>::front()
+	while(head != NULL)
 	{
-		assert (head != NULL); /* Assert terminates the program if there are no nodes in the list. */ 
-		return head-> info;
+		p = head;
+		head = head-> link;
+		delete p;
 	}
+		
+	head = last = NULL;
+	count = 0;
+}
 	
-	/* --- Last Element --- */
+/* --- Destructor --- */
 	
-	template <class T>
-	T LinkedList<T>::back()
+template <class T>
+LinkedList<T>::~LinkedList()
+{
+	destroyList();
+}
+	
+/* --- Output --- */
+	
+template <class T>
+ostream& operator << (ostream& os, const LinkedList<T> & list)
+{
+	node<T> *p = list.head;
+		
+	while(p != NULL)
 	{
-		assert (last != NULL);
-		return last-> info;
+		os << p-> info;
+		p = p-> link;
 	}
+		
+	return os;
+}
 	
-											/* --- END OF HEADER FILE --- */
+/* --- First Element --- */
+	
+template <class T>
+T LinkedList<T>::front()
+{
+	assert (head != NULL); /* Assert terminates the program if there are no nodes in the list. */ 
+	return head-> info;
+}
+	
+/* --- Last Element --- */
+	
+template <class T>
+T LinkedList<T>::back()
+{
+	assert (last != NULL);
+	return last-> info;
+}
+	
+					/* --- END OF HEADER FILE --- */
