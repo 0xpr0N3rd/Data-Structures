@@ -1,0 +1,39 @@
+// LinkedList1.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+struct node
+{
+	int data;
+	node *next;
+};
+
+int main()
+{
+	node *head = new node; //this head ptr points starting position
+	head = (node *)malloc(sizeof(node)); //created a memory space for head ptr
+	head->data = 10;
+
+	for (int i = 0; i < 3; i++)
+	{
+		head->next = (node *)malloc(sizeof(node)); //created a memory space for head's next node
+		head = head->next; 
+		head->data = 10 + i;
+		cout << head->data << endl;
+	}
+
+    return 0;
+}
+
+/* 
+Output:
+  ######################
+      10
+      11
+      12
+  ######################
+*/
