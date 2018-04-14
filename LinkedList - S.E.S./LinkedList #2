@@ -1,0 +1,48 @@
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+struct node
+{
+	int data;
+	node *next;
+};
+
+void print(node *node) //method for printing nodes
+{
+	while (node != NULL)
+	{
+		cout << node->data << endl;
+		node = node->next;
+	}
+}
+
+void add(node *r, int x) //method for adding new nodes
+{
+	while (r->next != NULL) { r = r->next; } //r = r-> next (preventing r to stuck showing same node, it is pointing to next node each time)
+	r->next = (node *)malloc(sizeof(node)); //add new node to next of r
+	r->next->data = x;
+	r->next->next = NULL;
+}
+
+int main()
+{
+	node *head = new node;
+	head = (node *)malloc(sizeof(node)); //allocated a memory space for head node
+	head->data = 500;
+	head->next = NULL;
+
+	node *cursor = new node;
+	cursor = (node *)malloc(sizeof(node)); //allocated a memory space for cursor node
+
+	for (int i = 0; i < 5; i++)
+		add(head, (i+1)*10); //creating new nodes
+
+	print(head); //print created nodes
+
+	return 0;
+}
