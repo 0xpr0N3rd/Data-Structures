@@ -1,6 +1,3 @@
-// ConsoleApplication2.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include <iostream>
 
@@ -55,7 +52,7 @@ int main()
 	temp = (node *)malloc(sizeof(node)); //araya eklenecek nodeu tutmak için oluşturduk
 	temp->next = cursor->next;	//nodeu araya eklemek için cursorın tuttuğu bir sonraki nodeun pointerını tempte tutulan yeni nodeun nextine bağladık
 	cursor->next = temp;   		//öncelikle yeni oluşturulan node araya girdiği için tempin nextiyle listin geri kalanını bağlamamız lazım, daha sonra cursor'ın
-								//next'inden bu yeni nodea bağlantı kurulması lazım
+					//next'inden bu yeni nodea bağlantı kurulması lazım
 	temp->data = 100; //try
 	cout << endl; 
 	print(head); //**************
